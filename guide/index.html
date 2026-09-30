@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>The media buying workflow guide</title>
+<meta name="description" content="Scan a market of competitor ads, find the ones worth learning from, and turn them into your own creatives. Step by step, with code and prompts.">
+<meta name="theme-color" content="#10281e">
+<meta property="og:title" content="The media buying workflow guide">
+<meta property="og:description" content="Scrape 721 ads for $4.36, score them, and build 26 ads + 2 reels + 28 hooks in your brand.">
+<meta property="og:image" content="https://evergreen-workflow-guide.vercel.app/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2310281e'/%3E%3Cpath d='M16 6l7 10h-4l5 8H8l5-8H9z' fill='%23D9C29A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=gambarino@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>try{var t=localStorage.getItem("gtheme");if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+<style>
+:root{
+  --bg:oklch(.985 .004 100);--fg:oklch(.22 .02 165);--muted:oklch(.42 .03 165);--border:oklch(.9 .008 110);--surface:oklch(.958 .008 105);--code:oklch(.2 .02 165);--code-fg:oklch(.94 .01 150);
+  --accent:oklch(.36 .06 165);--brass:oklch(.52 .1 75);--brass-f:oklch(.72 .1 82);--focus:oklch(.58 .12 78);--ok:oklch(.5 .1 160);--warn:oklch(.52 .16 30);
+  --hero:oklch(.22 .04 165);--on-hero:oklch(.98 .004 100);--hero-brass:oklch(.82 .09 85);
+  --r-sm:8px;--r-md:14px;--r-lg:22px;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px;--s8:64px;--s9:96px;
+  --step0:clamp(1rem,.95rem + .25vw,1.125rem);--step1:clamp(1.2rem,1.1rem + .5vw,1.45rem);--step3:clamp(1.9rem,1.3rem + 2.4vw,3rem);--step5:clamp(2.5rem,1.2rem + 5vw,5rem);
+}
+:root[data-theme=dark]{--bg:oklch(.16 .015 165);--fg:oklch(.95 .005 100);--muted:oklch(.74 .02 165);--border:oklch(.29 .02 165);--surface:oklch(.2 .02 165);--code:oklch(.12 .015 165);--accent:oklch(.8 .08 160);--brass:oklch(.8 .1 85);--focus:oklch(.82 .1 85);--ok:oklch(.78 .1 160);--warn:oklch(.75 .14 35)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:oklch(.16 .015 165);--fg:oklch(.95 .005 100);--muted:oklch(.74 .02 165);--border:oklch(.29 .02 165);--surface:oklch(.2 .02 165);--code:oklch(.12 .015 165);--accent:oklch(.8 .08 160);--brass:oklch(.8 .1 85);--focus:oklch(.82 .1 85);--ok:oklch(.78 .1 160);--warn:oklch(.75 .14 35)}}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:88px}@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--fg);font:var(--step0)/1.65 "Albert Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Gambarino,Georgia,serif;font-weight:400;letter-spacing:-.02em;margin:0}
+h1{font-size:var(--step5);line-height:1}h2{font-size:var(--step3);line-height:1.08}h3{font-size:var(--step1);line-height:1.2;margin:var(--s6) 0 var(--s2)}
+p{margin:var(--s4) 0;max-width:68ch}ul,ol{padding-left:1.2em;max-width:68ch}li{margin:6px 0}
+a{color:var(--accent)}img{max-width:100%;height:auto}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-999px;top:8px;background:#fff;color:#000;padding:12px 16px;z-index:60}.skip:focus{left:8px}
+.wrap{max-width:1240px;margin-inline:auto;padding-inline:clamp(16px,5vw,48px)}
+code,pre,kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+pre code{background:none!important;border:0!important;padding:0!important;font-size:inherit!important;color:inherit}
+code{font-size:.88em;background:var(--surface);border:1px solid var(--border);padding:1px 6px;border-radius:6px}
+/* top bar */
+.top{position:sticky;top:0;z-index:40;background:color-mix(in oklch,var(--bg) 84%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.top .wrap{display:flex;align-items:center;gap:var(--s4);min-height:64px}
+.brand{font:400 1.2rem Gambarino,Georgia,serif;text-decoration:none;color:var(--fg);margin-right:auto;display:flex;gap:10px;align-items:center}
+.brand::before{content:"";width:22px;height:22px;border-radius:6px;background:var(--hero);box-shadow:inset 0 -8px 0 0 var(--hero-brass)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 var(--s5);border-radius:999px;font-weight:600;text-decoration:none;border:1.5px solid transparent;cursor:pointer;font:inherit;font-weight:600;transition:transform .2s ease-out,background .2s,border-color .2s}
+.btn.p{background:var(--hero-brass);color:oklch(.2 .02 165)}.btn.p:hover{transform:translateY(-2px)}.btn.p:active{transform:none}
+.btn.g{border-color:color-mix(in oklch,currentColor 35%,transparent);background:transparent;color:inherit}.btn.g:hover{border-color:currentColor}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.tt{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--border);background:transparent;color:var(--fg);cursor:pointer;font-size:1.1rem}.tt:hover{background:var(--surface)}
+#bar{position:fixed;left:0;top:0;height:3px;width:100%;background:var(--brass-f);transform-origin:left;transform:scaleX(0);z-index:70}
+/* hero */
+.hero{background:var(--hero);color:var(--on-hero);position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(55% 80% at 88% 20%,oklch(.4 .07 165 / .5),transparent 70%),linear-gradient(oklch(1 0 0 / .04) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,oklch(1 0 0 / .04) 1px,transparent 1px) 0 0/48px 48px;-webkit-mask:linear-gradient(#000 55%,transparent);mask:linear-gradient(#000 55%,transparent)}
+.hero .wrap{position:relative;padding-block:clamp(56px,9vw,120px) clamp(48px,7vw,88px)}
+.eyebrow{font:600 .75rem "Albert Sans";letter-spacing:.16em;text-transform:uppercase;color:var(--hero-brass);margin-bottom:var(--s4)}
+.hero h1{max-width:13em}.hero h1 em{font-style:normal;color:var(--hero-brass)}
+.hero .lede{font-size:var(--step1);color:oklch(.9 .01 150);max-width:36em;margin-top:var(--s5)}
+.chips{display:flex;flex-wrap:wrap;gap:var(--s2);margin-top:var(--s5)}.chips span{font:500 .82rem ui-monospace,Menlo,monospace;border:1px solid oklch(1 0 0 / .25);border-radius:999px;padding:6px 14px;background:oklch(1 0 0 / .05)}
+.flow{list-style:none;margin:var(--s7) 0 0;padding:0;display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(150px,1fr));max-width:none}
+.flow a{display:block;height:100%;padding:var(--s4);border:1.5px solid oklch(1 0 0 / .22);border-radius:var(--r-md);background:oklch(1 0 0 / .05);color:var(--on-hero);text-decoration:none;transition:transform .2s ease-out,border-color .2s,background .2s}
+.flow a:hover{transform:translateY(-3px);border-color:var(--hero-brass);background:oklch(1 0 0 / .1)}
+.flow small{display:block;font:500 .75rem ui-monospace,monospace;color:var(--hero-brass);letter-spacing:.1em}.flow b{display:block;font:400 1.35rem Gambarino,serif;margin-top:4px}
+.hero .cta{margin-top:var(--s6);display:flex;flex-wrap:wrap;gap:var(--s3)}
+/* layout */
+.layout{display:grid;gap:var(--s7);padding-block:var(--s8)}@media(min-width:1024px){.layout{grid-template-columns:240px minmax(0,1fr)}}
+.toc{display:none}@media(min-width:1024px){.toc{display:block;position:sticky;top:96px;align-self:start;max-height:calc(100vh - 120px);overflow:auto}}
+.toc h2{font:600 .75rem "Albert Sans";letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:var(--s3)}
+.toc ol{list-style:none;padding:0;margin:0;border-left:1.5px solid var(--border)}.toc a{display:block;padding:8px 14px;margin-left:-1.5px;border-left:1.5px solid transparent;color:var(--muted);text-decoration:none;font-size:.95rem;min-height:36px}
+.toc a:hover{color:var(--fg)}.toc a.on{color:var(--fg);border-left-color:var(--brass-f);font-weight:600}
+main{min-width:0}
+.ch{padding-block:var(--s8);border-top:1px solid var(--border)}.ch:first-child{border-top:0;padding-top:0}
+.num{display:flex;align-items:center;gap:var(--s3);font:600 .78rem ui-monospace,Menlo,monospace;letter-spacing:.14em;color:var(--brass);text-transform:uppercase;margin-bottom:var(--s3)}
+.num i{font:normal 400 1rem Gambarino,serif;letter-spacing:0;background:var(--surface);border:1.5px solid var(--border);border-radius:99px;padding:2px 14px;color:var(--fg)}
+.meta{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s4) 0}.meta span{font:500 .8rem ui-monospace,monospace;background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:4px 12px;color:var(--muted)}
+.grid{display:grid;gap:var(--s4);grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));margin:var(--s5) 0}
+.card{border:1.5px solid var(--border);border-radius:var(--r-lg);padding:var(--s5);background:var(--bg);transition:transform .2s ease-out,border-color .2s}.card:hover{transform:translateY(-3px);border-color:color-mix(in oklch,var(--brass-f) 60%,var(--border))}
+.card b{font:400 1.25rem Gambarino,serif;display:block;margin-bottom:6px}.card p{margin:0;color:var(--muted);font-size:.95rem}.card .k{font:600 .72rem ui-monospace,monospace;letter-spacing:.14em;color:var(--brass);text-transform:uppercase;display:block;margin-bottom:var(--s3)}
+.callout{border-left:4px solid var(--brass-f);background:var(--surface);padding:var(--s4) var(--s5);border-radius:0 var(--r-md) var(--r-md) 0;margin:var(--s5) 0;max-width:68ch}.callout b{font:400 1.15rem Gambarino,serif;display:block;margin-bottom:4px}.callout p{margin:0}
+.callout.warn{border-left-color:var(--warn)}
+/* code */
+.code{position:relative;margin:var(--s5) 0}.code pre{margin:0;background:var(--code);color:var(--code-fg);border-radius:var(--r-md);padding:var(--s5);overflow-x:auto;font-size:.84rem;line-height:1.65;border:1px solid var(--border)}
+.code .lb{position:absolute;left:var(--s4);top:-12px;font:600 .68rem ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;background:var(--hero);color:var(--hero-brass);border-radius:6px;padding:3px 10px}
+.copy{position:absolute;right:10px;top:10px;min-height:44px;min-width:64px;padding:0 14px;border-radius:10px;border:1px solid oklch(1 0 0 / .25);background:oklch(1 0 0 / .08);color:var(--code-fg);font:600 .8rem "Albert Sans";cursor:pointer}.copy:hover{background:oklch(1 0 0 / .18)}
+/* tabs */
+.tabs [role=tablist]{display:flex;gap:6px;margin-bottom:var(--s3)}.tabs [role=tab]{min-height:44px;padding:0 var(--s4);border-radius:999px;border:1.5px solid var(--border);background:transparent;color:var(--muted);font:inherit;font-weight:600;cursor:pointer}
+.tabs [role=tab][aria-selected=true]{background:var(--hero);color:var(--on-hero);border-color:var(--hero)}.tabs [role=tabpanel][hidden]{display:none}
+/* bars */
+.bars{margin:var(--s5) 0;display:grid;gap:var(--s3);max-width:44rem}.bar{display:grid;grid-template-columns:minmax(120px,190px) 1fr 52px;align-items:center;gap:var(--s3);font-size:.95rem}
+.bar .t{height:12px;border-radius:6px;background:var(--surface);border:1px solid var(--border);overflow:hidden}.bar .t i{display:block;height:100%;width:0;background:var(--accent);border-radius:6px;transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.bar.d .t i{background:var(--brass-f)}.bar .v{text-align:right;font:600 .9rem ui-monospace,monospace}
+.on .bar .t i,.bars.in .bar .t i{width:var(--w)}
+/* estimator */
+.est{display:grid;gap:var(--s5);border:1.5px solid var(--border);border-radius:var(--r-lg);padding:var(--s6);margin:var(--s5) 0;background:var(--surface)}@media(min-width:760px){.est{grid-template-columns:1fr 1fr;align-items:center}}
+.est label{display:block;font-size:.9rem;color:var(--muted);margin-bottom:6px}.est input[type=range]{width:100%;accent-color:var(--brass-f);min-height:44px}.est .out{font:400 clamp(2.4rem,1.5rem + 4vw,4rem)/1 Gambarino,serif;color:var(--accent)}.est small{color:var(--muted)}
+/* checklist */
+.chk{list-style:none;padding:0;margin:var(--s5) 0;max-width:none;border:1.5px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.chk li{margin:0;border-top:1px solid var(--border)}.chk li:first-child{border-top:0}
+.chk label{display:flex;gap:var(--s4);align-items:flex-start;padding:var(--s4) var(--s5);cursor:pointer;min-height:56px}.chk label:hover{background:var(--surface)}
+.chk input{width:24px;height:24px;margin-top:2px;accent-color:var(--accent);flex:none}.chk input:checked+span{color:var(--muted);text-decoration:line-through}
+.prog{display:flex;align-items:center;gap:var(--s3);font:600 .85rem ui-monospace,monospace;color:var(--muted);margin-top:var(--s3)}.prog .t{flex:1;max-width:280px;height:8px;border-radius:4px;background:var(--surface);border:1px solid var(--border);overflow:hidden}.prog .t i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+/* timeline */
+.tl{list-style:none;margin:var(--s5) 0;padding:0;max-width:44rem}.tl li{position:relative;padding:0 0 var(--s5) var(--s8);margin:0}
+.tl li::before{content:"";position:absolute;left:15px;top:32px;bottom:0;width:2px;background:var(--border)}.tl li:last-child::before{display:none}
+.tl i{position:absolute;left:0;top:0;width:32px;height:32px;border-radius:50%;border:2px solid var(--border);background:var(--bg);display:grid;place-items:center;font:600 .78rem ui-monospace,monospace;font-style:normal;color:var(--muted)}
+.tl small{font:600 .72rem ui-monospace,monospace;letter-spacing:.12em;color:var(--brass);text-transform:uppercase;display:block}.tl b{font:400 1.25rem Gambarino,serif;display:block;margin:2px 0}
+details{border:1.5px solid var(--border);border-radius:var(--r-md);padding:0 var(--s5);margin:var(--s3) 0;max-width:68ch}summary{cursor:pointer;min-height:56px;display:flex;align-items:center;font:400 1.15rem Gambarino,serif}details p{margin-top:0}details[open]{background:var(--surface)}
+/* end */
+.end{background:var(--hero);color:var(--on-hero);padding-block:var(--s9)}.end h2{max-width:14em}.end p{color:oklch(.9 .01 150);font-size:var(--step1);margin-top:var(--s5)}.end .cta{margin-top:var(--s6);display:flex;flex-wrap:wrap;gap:var(--s3)}
+footer{padding-block:var(--s6);color:var(--muted);font-size:.88rem}
+[data-reveal]{opacity:0;transform:translateY(16px);transition:opacity .5s ease-out,transform .5s ease-out}[data-reveal].is{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}[data-reveal]{opacity:1;transform:none}html{scroll-behavior:auto}}
+@media(max-width:600px){.bar{grid-template-columns:1fr 52px}.bar .t{grid-column:1/3;order:3}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div id="bar" aria-hidden="true"></div>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#top">Media buying workflow</a>
+  <button class="tt" id="tt" aria-label="Toggle light and dark theme">◐</button>
+  <a class="btn p" href="#book">Get this built for you</a>
+</div></header>
+
+<section class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">Guide · From scrape to launch</div>
+  <h1>Find ads worth learning from. <em>Turn them into your own.</em></h1>
+  <p class="lede">How to scan a whole market of competitor ads, narrow it to the few worth studying, and build a batch of on-brand creatives you can test, without guessing and without a design queue.</p>
+  <div class="chips"><span>721 ads scanned</span><span>$4.36 in scraping</span><span>26 ads + 2 reels + 28 hooks</span><span>a couple of hours</span></div>
+  <ol class="flow" aria-label="The six steps">
+    <li><a href="#scrape"><small>01</small><b>Scrape</b></a></li>
+    <li><a href="#score"><small>02</small><b>Score</b></a></li>
+    <li><a href="#tag"><small>03</small><b>Tag</b></a></li>
+    <li><a href="#patterns"><small>04</small><b>Learn</b></a></li>
+    <li><a href="#build"><small>05</small><b>Build</b></a></li>
+    <li><a href="#launch"><small>06</small><b>Launch</b></a></li>
+  </ol>
+  <div class="cta"><a class="btn p" href="#stack">Start the guide</a></div>
+</div></section>
+
+<div class="wrap layout">
+<aside class="toc" aria-label="Contents"><h2>Contents</h2><ol id="tocl">
+  <li><a href="#intro">What you're building</a></li><li><a href="#stack">The stack</a></li><li><a href="#scrape">1 · Scrape the market</a></li><li><a href="#score">2 · Score by survival</a></li><li><a href="#tag">3 · Tag every ad</a></li><li><a href="#patterns">4 · Find the patterns</a></li><li><a href="#build">5 · Opus picks and briefs</a></li><li><a href="#statics">6 · Generate statics</a></li><li><a href="#reels">7 · Render reels</a></li><li><a href="#launch">8 · Launch properly</a></li><li><a href="#results">9 · Read results</a></li><li><a href="#rules">10 · Rules and limits</a></li>
+</ol></aside>
+
+<main id="main">
+<section class="ch" id="intro" data-reveal>
+  <div class="num"><i>00</i>Overview</div><h2>What you're building</h2>
+  <p>A repeatable loop: <b>scrape</b> every ad in your niche, <b>score</b> each by how long the advertiser kept paying for it, <b>tag</b> the angle and offer, <b>learn</b> what the survivors share, then <b>generate</b> your own creatives from those patterns, in your brand. It replaces the weekly "what should we post" scramble with a research step that runs itself.</p>
+  <div class="callout"><b>Read this first</b><p>Longevity is a signal, not proof. An ad that has run 90 days is probably converting for someone, but you learn what works for <em>you</em> only by testing. The output is a batch of well-researched ads ready to test, not guaranteed winners. The Evergreen numbers in this guide are research findings; the campaign launches Oct 1.</p></div>
+</section>
+
+<section class="ch" id="stack" data-reveal>
+  <div class="num"><i>00</i>Tools</div><h2>The stack</h2>
+  <div class="grid">
+    <div class="card"><span class="k">Scrape</span><b>Apify</b><p><code>facebook-ads-scraper</code> pulls copy, media, start date, live status and copies from the Meta Ad Library.</p></div>
+    <div class="card"><span class="k">Score + tag</span><b>Your code + Jev or any LLM</b><p>A longevity score, then yes/no questions per ad for angle, offer and hook.</p></div>
+    <div class="card"><span class="k">Orchestrate</span><b>Claude Opus 5.5</b><p>Picks the ads worth learning from, writes hooks and briefs, runs the batch.</p></div>
+    <div class="card"><span class="k">Statics</span><b>GPT Image</b><p>Generates scenes and backgrounds. Text stays exact.</p></div>
+    <div class="card"><span class="k">Video</span><b>HyperFrames</b><p>Renders reels from HTML, so they are editable and on brand.</p></div>
+    <div class="card"><span class="k">Run</span><b>Meta Ads Manager</b><p>Plus a pixel, UTMs and a lead form that fires the right event.</p></div>
+  </div>
+</section>
+
+<section class="ch" id="scrape" data-reveal>
+  <div class="num"><i>01</i>Scrape</div><h2>Scrape the market</h2>
+  <div class="meta"><span>about 30 min</span><span>about $0.006 per ad</span></div>
+  <p>Run three passes so you catch both the loud advertisers and the quiet long-runners.</p>
+  <div class="grid">
+    <div class="card"><span class="k">Pass 1</span><b>Keywords</b><p>Named competitors plus niche phrases: "college essay help", "common app essay", "ivy league admissions".</p></div>
+    <div class="card"><span class="k">Pass 2</span><b>Competitor pages</b><p>Every live ad from the advertiser pages pass 1 surfaced. Use their Page IDs.</p></div>
+    <div class="card"><span class="k">Pass 3</span><b>Image-only</b><p>Static ads that are live now, sorted by impressions. Statics are what you can borrow structure from.</p></div>
+  </div>
+  <p>The Ad Library URL is your input. Sort by total impressions so survivors come first.</p>
+  <div class="code"><span class="lb">Ad Library URL</span><button class="copy" type="button">Copy</button><pre><code>https://www.facebook.com/ads/library/?active_status=all&amp;ad_type=all&amp;country=US
+  &amp;media_type=all&amp;q=college%20essay%20help&amp;search_type=keyword_unordered
+  &amp;sort_data[mode]=total_impressions&amp;sort_data[direction]=desc</code></pre></div>
+  <p>Call the actor from Python. Keep the token in an environment variable and never in code you share.</p>
+  <div class="code"><span class="lb">python</span><button class="copy" type="button">Copy</button><pre><code>import json, os, time, urllib.request
+
+TOKEN = os.environ["APIFY_TOKEN"]
+
+def api(path, body=None):
+    req = urllib.request.Request(
+        f"https://api.apify.com/v2/{path}",
+        data=json.dumps(body).encode() if body is not None else None,
+        headers={"Authorization": f"Bearer {TOKEN}", "Content-Type": "application/json"},
+        method="POST" if body is not None else "GET")
+    return json.load(urllib.request.urlopen(req))
+
+run = api("acts/apify~facebook-ads-scraper/runs",
+          {"startUrls": [{"url": u} for u in URLS], "resultsLimit": 30})["data"]
+while run["status"] in ("READY", "RUNNING"):
+    time.sleep(15)
+    run = api(f"actor-runs/{run['id']}")["data"]
+ads = api(f"datasets/{run['defaultDatasetId']}/items?clean=true&amp;format=json")</code></pre></div>
+  <h3>Estimate your scan cost</h3>
+  <div class="est">
+    <div><label for="scan">Ads to scan: <b id="scanv">721</b></label><input id="scan" type="range" min="100" max="3000" step="50" value="721"><small>At about $0.006 per ad on Apify's free tier. Check current pricing.</small></div>
+    <div><div class="out" id="scanc">$4.33</div><small>Our run: 721 ads came to $4.36 including a few retries.</small></div>
+  </div>
+  <p><b>Then clean the data.</b> Filter to your niche with a regex on the copy, drop junk advertisers, dedupe, and download media once. Meta's image links expire within days.</p>
+</section>
+
+<section class="ch" id="score" data-reveal>
+  <div class="num"><i>02</i>Score</div><h2>Score by how long ads survive</h2>
+  <p>Advertisers switch off losing ads within a week or two. An ad still running after months is almost always earning its keep. Turn that into a score from public signals only.</p>
+  <div class="code"><span class="lb">python</span><button class="copy" type="button">Copy</button><pre><code>import math
+
+def win_probability(days_running, copies, is_live, advertiser_live_ads):
+    z = (-3.0
+         + 1.1 * math.log1p(days_running / 7)      # longer = better
+         + 0.5 * math.log1p(copies - 1)            # same creative under many ad IDs = scaled
+         + 0.6 * is_live                           # still running today
+         + 0.3 * math.log1p(advertiser_live_ads))  # advertiser keeps investing
+    return 1 / (1 + math.exp(-z))</code></pre></div>
+  <p>"Copies" matters: advertisers scale a winner by duplicating it. These weights are hand-set, not trained on conversions. Treat 85% and up as proven enough to study.</p>
+</section>
+
+<section class="ch" id="tag" data-reveal>
+  <div class="num"><i>03</i>Tag</div><h2>Tag every ad by angle</h2>
+  <p>You want the <em>ideas</em> the survivors share, not just which ads. Start fast and free with keyword rules, then upgrade to questions for context.</p>
+  <div class="tabs" id="tabs">
+    <div role="tablist" aria-label="Tagging method"><button role="tab" id="t1" aria-selected="true" aria-controls="p1">Keyword rules</button><button role="tab" id="t2" aria-selected="false" aria-controls="p2" tabindex="-1">Jev / LLM questions</button></div>
+    <div role="tabpanel" id="p1" aria-labelledby="t1"><div class="code"><span class="lb">python</span><button class="copy" type="button">Copy</button><pre><code>ANGLES = {
+  "Free guide / lead magnet": r"free guide|download|checklist|template",
+  "Webinar / training":       r"webinar|training|masterclass|workshop|register",
+  "Stat / proof":             r"\d+%|\d{2,3},?\d{3}\+?|\d+\+ (students|families|essays)",
+  "Scarcity / deadline":      r"spots? left|limited|deadline|closing|last chance",
+  "Parent-addressed":         r"\bparents?\b|your (child|son|daughter|teen)|families",
+  "Free consult":             r"free consult|free call|book a|strategy session",
+  "Question hook":            r"^[^.!\n]{0,90}\?",
+  "Results / admits":         r"admitted|accepted|got in|acceptance letter",
+}</code></pre></div></div>
+    <div role="tabpanel" id="p2" aria-labelledby="t2" hidden><div class="code"><span class="lb">prompt</span><button class="copy" type="button">Copy</button><pre><code>Ad copy: {text}
+Q1. Is this ad addressed to a parent (not the student)?
+Q2. Does it offer something free before asking for a sale?
+Q3. Does it state a concrete number or proof point?
+Q4. Does it create real deadline pressure?
+Answer each as a probability from 0 to 1.</code></pre></div><p>Small, single-purpose questions beat one big "analyze this ad" prompt. The answers are comparable across thousands of ads, and a typed-probability model such as Jev makes that cheap and fast.</p></div>
+  </div>
+</section>
+
+<section class="ch" id="patterns" data-reveal>
+  <div class="num"><i>04</i>Learn</div><h2>Find the patterns</h2>
+  <p>Group by format, copy length, button and angle. Compare each average to the library average. This is what we found across 186 studied ads. These are research findings, not campaign results.</p>
+  <div class="bars" id="bars" role="img" aria-label="Average score by signal: copy under 400 characters 74 percent, free consult 70, webinar-only 52, carousels 45">
+    <div class="bar"><span>Copy under 400 chars</span><div class="t"><i style="--w:74%"></i></div><span class="v">74%</span></div>
+    <div class="bar"><span>Free consult offers</span><div class="t"><i style="--w:70%"></i></div><span class="v">70%</span></div>
+    <div class="bar"><span>Free guides</span><div class="t"><i style="--w:62%"></i></div><span class="v">62%</span></div>
+    <div class="bar"><span>Copy over 400 chars</span><div class="t"><i style="--w:58%"></i></div><span class="v">58%</span></div>
+    <div class="bar d"><span>Webinar-only ads</span><div class="t"><i style="--w:52%"></i></div><span class="v">52%</span></div>
+    <div class="bar d"><span>Carousels</span><div class="t"><i style="--w:45%"></i></div><span class="v">45%</span></div>
+  </div>
+  <div class="grid">
+    <div class="card"><span class="k">Most common angle</span><b>Parent-addressed</b><p>99 ads, average score 63%.</p></div>
+    <div class="card"><span class="k">Best-performing angle</span><b>Free consult</b><p>28 ads, average score 70%. Under-used compared with how well it survives.</p></div>
+    <div class="card"><span class="k">Survival</span><b>15 of 186</b><p>were switched off within two weeks. Only 40 cleared 85%.</p></div>
+  </div>
+  <p>Compare <b>most common</b> with <b>best performing</b>. If everyone runs an angle that scores below average, that is your opening.</p>
+</section>
+
+<section class="ch" id="build" data-reveal>
+  <div class="num"><i>05</i>Build</div><h2>Let Opus pick and brief</h2>
+  <p>Give Claude the scored, tagged table and your brand facts. Ask for structured output you can feed the next step.</p>
+  <div class="code"><span class="lb">prompt</span><button class="copy" type="button">Copy</button><pre><code>You are the creative strategist for {brand}, {one-line description}.
+Input: a table of {N} scored, tagged competitor ads (id, advertiser,
+days_running, score, angles, copy).
+
+1. Pick the 40 ads most worth learning from. Prefer high score, live, and angles
+   the market under-uses. Return ids and one line on why each.
+2. From them, write 28 hooks for parents of {audience}. Each under 12 words.
+   No guarantees, no prices, no invented numbers, no em dashes.
+3. Return 26 creative briefs as JSON: {layout, headline, subline, cta, angle,
+   image_scene, aspect, destination}. Borrow structure only. Never copy wording
+   or another brand's assets.
+Facts you may use: {approved facts only}.</code></pre></div>
+  <div class="callout warn"><b>Guardrails</b><p>Give the model a short list of approved facts (credentials, real numbers, real reviews) and forbid everything else. Models will happily invent testimonials and statistics.</p></div>
+</section>
+
+<section class="ch" id="statics" data-reveal>
+  <div class="num"><i>06</i>Statics</div><h2>Generate the statics</h2>
+  <p>Use the image model for the <b>scene</b> and keep text exact. Two reliable patterns: generate the background and set the text in HTML so spelling is perfect, or let the model render text but quote the exact strings and proofread every glyph.</p>
+  <div class="code"><span class="lb">prompt</span><button class="copy" type="button">Copy</button><pre><code>Editorial photograph, natural window light. Palette: deep evergreen #1F4A3C,
+warm paper white, soft sage, brass accent #B8935A. {scene}. Calm, premium.
+Leave the left 55% as clean negative space for a headline.
+No text, no logos, no people's faces toward camera. Aspect ratio {4:5}.</code></pre></div>
+  <div class="grid">
+    <div class="card"><span class="k">Do</span><b>Keep brand tokens fixed</b><p>Same colors and two fonts on every ad, so the batch reads as one company.</p></div>
+    <div class="card"><span class="k">Do</span><b>Make two ratios</b><p>4:5 for Feed, 9:16 for Reels and Stories. Square ads look small in Reels.</p></div>
+    <div class="card"><span class="k">Never</span><b>Fake proof</b><p>No real people's faces or lookalikes, no fake reviews or acceptance letters, no university logos.</p></div>
+  </div>
+</section>
+
+<section class="ch" id="reels" data-reveal>
+  <div class="num"><i>07</i>Reels</div><h2>Render the reels</h2>
+  <p><b>HyperFrames</b> turns HTML into video, so a reel is a web page with a timeline: your fonts, your colors, text you can edit and re-render in seconds. Brief it like a designer: the message, the length (30 to 35 seconds), the words on screen and the brand tokens. If you use an AI voice, keep it clearly synthetic.</p>
+</section>
+
+<section class="ch" id="launch" data-reveal>
+  <div class="num"><i>08</i>Launch</div><h2>Launch it properly</h2>
+  <p>Tick these off before you spend a dollar. Your progress saves in this browser.</p>
+  <ul class="chk" id="chk">
+    <li><label><input type="checkbox"><span>Meta pixel installed, with a <code>Lead</code> event on the thank-you page</span></label></li>
+    <li><label><input type="checkbox"><span>A <em>different</em> event for guide downloads, so Meta doesn't chase low-intent "leads"</span></label></li>
+    <li><label><input type="checkbox"><span>UTMs on every ad link, with <code>utm_content</code> set to the ad id</span></label></li>
+    <li><label><input type="checkbox"><span>Domain verified, <code>Lead</code> ranked first in Aggregated Event Measurement</span></label></li>
+    <li><label><input type="checkbox"><span>Form emails confirmed and a real test lead received</span></label></li>
+    <li><label><input type="checkbox"><span>A person committed to replying to every inquiry within 15 minutes</span></label></li>
+    <li><label><input type="checkbox"><span>Advantage+ creative enhancements turned off</span></label></li>
+  </ul>
+  <div class="prog"><span id="cp">0 / 7</span><div class="t"><i id="cf"></i></div></div>
+  <h3>Structure</h3>
+  <div class="grid">
+    <div class="card"><span class="k">Ad set 1</span><b>Local cold → consultation</b><p>About half the budget. Your service area, ages 38 to 58, Advantage+ audience.</p></div>
+    <div class="card"><span class="k">Ad set 2</span><b>Broad cold → free guide</b><p>About a quarter. Builds your list and retargeting pool.</p></div>
+    <div class="card"><span class="k">Ad set 3</span><b>Retarget → consultation</b><p>The rest. Start at $5 a day until the pool passes about 1,000 people.</p></div>
+  </div>
+  <p>One campaign, Leads objective, budget at the ad-set level, 3 to 4 ads per ad set. Example budget: $75 a day for 14 days. That is a planning estimate, not a benchmark.</p>
+</section>
+
+<section class="ch" id="results" data-reveal>
+  <div class="num"><i>09</i>Results</div><h2>Read results and keep going</h2>
+  <ol class="tl">
+    <li><i>1</i><small>Days 1 to 3</small><b>Change nothing</b><span>The learning phase. Answer comments.</span></li>
+    <li><i>2</i><small>Day 4</small><b>First read</b><span>Judge by cost per consultation request, then link CTR (aim for 0.9% or better) and landing-page conversion (3 to 8% is healthy for a short form).</span></li>
+    <li><i>3</i><small>Day 8</small><b>Cut and add</b><span>Pause the weakest third of ads. Add new ones from your next scrape.</span></li>
+    <li><i>4</i><small>Day 15</small><b>Scale carefully</b><span>Raise a winner by at most 20% every three days. Don't duplicate ad sets.</span></li>
+  </ol>
+  <p>Track downstream in a sheet: request, call booked, call held, client, per <code>utm_content</code>. Re-run the scrape every two to four weeks. Your best new ads come from what has started surviving.</p>
+</section>
+
+<section class="ch" id="rules" data-reveal>
+  <div class="num"><i>10</i>Guardrails</div><h2>Rules, limits, mistakes</h2>
+  <details><summary>Borrow structure, not content</summary><p>Layout, hierarchy and angle are fair game. Copying wording, images or another brand's identity is not.</p></details>
+  <details><summary>No guarantees, no invented proof</summary><p>Use only real reviews, real numbers and real credentials. Have the model work from an approved fact list.</p></details>
+  <details><summary>Longevity is a heuristic</summary><p>A long-running ad can be profitable for one advertiser and wrong for you. Test small before you scale.</p></details>
+  <details><summary>Judge by clients, not clicks</summary><p>Clicks and downloads are easy to buy. Track requests that become calls that become clients.</p></details>
+  <details><summary>Disclosures and data</summary><p>Photorealistic AI images may be labelled "AI info" by Meta. Don't put a real person's likeness in generated ads. Scrape only public Ad Library data and follow the terms of the actor you use.</p></details>
+</section>
+</main>
+</div>
+
+<section class="end" id="book"><div class="wrap">
+  <div class="eyebrow">Want it done for you?</div>
+  <h2>We'll build this around your business.</h2>
+  <p>Research, creatives, launch plan and tracking, so you keep doing the work only you can do. 30 minutes, bring one review or quote and leave with your first ad.</p>
+  <div class="cta"><a class="btn p" href="https://calendly.com/aayan-rehmann/30min" target="_blank" rel="noopener">Book a 30-minute call</a></div>
+</div></section>
+<footer><div class="wrap">Evergreen Admissions Consulting is the working example. Figures are research findings from our scan, not campaign results.</div></footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const root=document.documentElement;
+$("#tt").addEventListener("click",()=>{const dark=(root.dataset.theme||(matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light"))==="dark",n=dark?"light":"dark";root.dataset.theme=n;try{localStorage.setItem("gtheme",n)}catch(e){}});
+// progress
+const bar=$("#bar");const prog=()=>{const h=document.documentElement.scrollHeight-innerHeight;bar.style.transform=`scaleX(${h>0?Math.min(1,scrollY/h):0})`};addEventListener("scroll",prog,{passive:true});prog();
+// toc active
+const links=$$("#tocl a"),secs=links.map(a=>$(a.getAttribute("href")));
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle("on",l.getAttribute("href")==="#"+e.target.id))}})},{rootMargin:"-30% 0px -60% 0px"});secs.forEach(s=>s&&io.observe(s));
+// reveal + bars
+const rv=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is");const b=$(".bars",e.target);if(b)b.classList.add("in");rv.unobserve(e.target)}}),{rootMargin:"0px 0px -8% 0px"});$$("[data-reveal]").forEach(s=>rv.observe(s));
+// copy
+$$(".copy").forEach(b=>b.addEventListener("click",async()=>{const t=$("pre",b.parentNode).innerText;try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement("textarea");a.value=t;document.body.append(a);a.select();document.execCommand("copy");a.remove()}const o=b.textContent;b.textContent="Copied";setTimeout(()=>b.textContent=o,1300)}));
+// tabs
+const tabs=$$("#tabs [role=tab]");tabs.forEach(t=>{t.addEventListener("click",()=>sel(t));t.addEventListener("keydown",e=>{const i=tabs.indexOf(t);if(e.key==="ArrowRight"||e.key==="ArrowLeft"){const n=tabs[(i+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length];sel(n);n.focus()}})});
+function sel(t){tabs.forEach(x=>{const on=x===t;x.setAttribute("aria-selected",on);x.tabIndex=on?0:-1;$("#"+x.getAttribute("aria-controls")).hidden=!on})}
+// estimator
+const sc=$("#scan");const est=()=>{$("#scanv").textContent=Number(sc.value).toLocaleString("en-US");$("#scanc").textContent="$"+(sc.value*0.006).toFixed(2)};sc.addEventListener("input",est);est();
+// checklist (persisted)
+const cb=$$("#chk input");let st=[];try{st=JSON.parse(localStorage.getItem("gchk")||"[]")}catch(e){}
+cb.forEach((c,i)=>{c.checked=!!st[i];c.addEventListener("change",up)});
+function up(){const v=cb.map(c=>c.checked);try{localStorage.setItem("gchk",JSON.stringify(v))}catch(e){}const n=v.filter(Boolean).length;$("#cp").textContent=n+" / "+v.length;$("#cf").style.width=(n/v.length*100)+"%"}up();
+</script>
+</body>
+</html>
